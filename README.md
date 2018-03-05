@@ -8,6 +8,7 @@ arXiv preprint: https://arxiv.org/abs/1612.03897
 
 We provide TensorFlow code for the following experiments:
 - glasses compositing
+- (indoor object compositing to come soon!)
 
 --------------------------------------
 
@@ -27,7 +28,24 @@ The following from the [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 - Attribute annotations
 - Train/val/test partitions
 
-They should be placed in the `dataset` folder under `glasses`.
+After downloading CelebA, run `python3 preprocess_celebA.py` under `glasses` to convert the  train/test split to .npy format.
+
+### Running the code
+
+To train ST-GAN, run `./train.sh`.  
+The checkpoints are saved in the automatically created directory `model_GROUP`; summaries are saved in `summary_GROUP`.  
+The list of optional arguments can be found by executing `python3 train.py --help`.  
+
+### Visualizing the results  
+We've included code to visualize the training over TensorBoard. To execute, run
+```
+tensorboard --logdir=summary_GROUP --port=6006
+```
+
+We provide three types of data visualization:  
+1. **SCALARS**: training curves over iterations (not much meaningful)  
+2. **IMAGES**: composite results  
+3. **GRAPH**: network architecture
 
 --------------------------------------
 
