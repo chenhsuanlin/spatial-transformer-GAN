@@ -32,9 +32,9 @@ After downloading CelebA, run `python3 preprocess_celebA.py` under `glasses` to 
 
 ### Running the code
 
-To train ST-GAN, run `./train.sh`.  
+To train ST-GAN, run `./train.sh` under `glasses`.  
 The checkpoints are saved in the automatically created directory `model_GROUP`; summaries are saved in `summary_GROUP`.  
-The list of optional arguments can be found by executing `python3 train.py --help`.  
+The list of optional arguments can be found by executing `python3 train_STGAN.py --help`.  
 
 ### Visualizing the results  
 We've included code to visualize the training over TensorBoard. To execute, run
