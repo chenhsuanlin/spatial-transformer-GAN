@@ -10,15 +10,13 @@ def set(training):
 	parser.add_argument("--group",					default="0",			help="name for group")
 	parser.add_argument("--model",					default="test",			help="name for model instance")
 	parser.add_argument("--loadGP",					default=None,			help="load pretrained model (GP)")
-	parser.add_argument("--loadD",					default=None,			help="load pretrained model (D)")
 	parser.add_argument("--size",					default="144x144",		help="resolution of background image")
 	parser.add_argument("--warpType",				default="homography",	help="type of warp function on foreground image")
 	parser.add_argument("--warpN",		type=int,	default=1,				help="number of spatial transformations")
 	parser.add_argument("--stdGP",		type=float,	default=0.01,			help="initialization stddev (GP)")
 	parser.add_argument("--stdD",		type=float,	default=0.01,			help="initialization stddev (D)")
-	parser.add_argument("--pertFG",		type=float,	default=0.1,			help="scale of initial perturbation (glasses)")
-	parser.add_argument("--pertBG",		type=float,	default=0.1,			help="scale of initial perturbation (face)")
 	if training: # training
+		parser.add_argument("--loadD",					default=None,		help="load pretrained model (D)")
 		parser.add_argument("--loaderN",	type=int,	default=16,		help="threads to load data")
 		parser.add_argument("--lrGP",		type=float,	default=1e-5,	help="base learning rate (GP)")
 		parser.add_argument("--lrGPdecay",	type=float,	default=1.0,	help="learning rate decay (GP)")
@@ -35,8 +33,13 @@ def set(training):
 		parser.add_argument("--histQsize",	type=int,	default=10000,	help="history queue size for updating D")
 		parser.add_argument("--fromIt",		type=int,	default=0,		help="resume training from iteration number")
 		parser.add_argument("--toIt",		type=int,	default=50000,	help="run training to iteration number")
+		parser.add_argument("--pertFG",		type=float,	default=0.1,	help="scale of initial perturbation (glasses)")
+		parser.add_argument("--pertBG",		type=float,	default=0.1,	help="scale of initial perturbation (face)")
 	else: # evaluation
-		parser.add_argument("--batchSize",	type=int,	default=1,		help="batch size for evaluation")
+		parser.add_argument("--batchSize",	type=int,	default=10,		help="batch size for evaluation")
+		parser.add_argument("--pertFG",		type=float,	default=0.0,	help="scale of initial perturbation (glasses)")
+		parser.add_argument("--pertBG",		type=float,	default=0.0,	help="scale of initial perturbation (face)")
+		parser.add_argument("--loadImage",				default=None,	help="load image to test")
 
 	opt = parser.parse_args()
 

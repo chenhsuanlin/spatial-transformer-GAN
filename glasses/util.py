@@ -5,7 +5,7 @@ import os
 import termcolor
 
 def mkdir(path):
-	if not os.path.exists(path): os.mkdir(path)
+	os.makedirs(path,exist_ok=True)
 def imread(fname):
 	return scipy.misc.imread(fname)/255.0
 def imsave(fname,array):

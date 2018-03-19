@@ -25,8 +25,7 @@ with tf.device(opt.GPUdevice):
 	imageRealData = tf.placeholder(tf.float32,shape=[opt.batchSize,opt.dataH,opt.dataW,3])
 	imageBGfakeData = tf.placeholder(tf.float32,shape=[opt.batchSize,opt.dataH,opt.dataW,3])
 	imageFGfake = tf.placeholder(tf.float32,shape=[opt.batchSize,opt.H,opt.W,4])
-	pInit = tf.placeholder(tf.float32,shape=[opt.batchSize,opt.warpDim])
-	PH = [imageBGfakeData,imageRealData,imageFGfake,pInit]
+	PH = [imageBGfakeData,imageRealData,imageFGfake]
 	# ------ generate perturbation ------
 	imageReal = data.perturbBG(opt,imageRealData)
 	imageBGfake = data.perturbBG(opt,imageBGfakeData)

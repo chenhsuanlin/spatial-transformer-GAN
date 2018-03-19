@@ -7,7 +7,7 @@ HOME = os.getenv("HOME")
 
 # load data (one thread)
 def load(opt,test=False):
-	path = "dataset_b"
+	path = "dataset"
 	if test:
 		images = np.load("{0}/image_test.npy".format(path))
 		hasGlasses = np.load("{0}/attribute_test.npy".format(path))[:,15]
@@ -32,14 +32,23 @@ def makeBatch(opt,data,PH):
 	randIdx0 = np.random.randint(N0,size=[opt.batchSize])
 	randIdx1 = np.random.randint(N1,size=[opt.batchSize])
 	randIdxG = np.random.randint(NG,size=[opt.batchSize])
-	p = np.zeros([opt.batchSize,opt.warpDim])
 	# put data in placeholders
-	[imageBGfakeData,imageRealData,imageFGfake,pInit] = PH
+	[imageBGfakeData,imageRealData,imageFGfake] = PH
 	batch = {
 		imageBGfakeData: data["image0"][randIdx0]/255.0,
 		imageRealData: data["image1"][randIdx1]/255.0,
 		imageFGfake: data["glasses"][randIdxG]/255.0,
-		pInit: p,
+	}
+	return batch
+
+# make test batch
+def makeBatchEval(opt,testImage,glasses,PH):
+	idxG = np.arange(opt.batchSize)
+	# put data in placeholders
+	[imageBG,imageFG] = PH
+	batch = {
+		imageBG: np.tile(testImage,[opt.batchSize,1,1,1]),
+		imageFG: glasses[idxG]/255.0,
 	}
 	return batch
 
