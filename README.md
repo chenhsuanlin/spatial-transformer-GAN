@@ -6,6 +6,8 @@ Website: https://chenhsuanlin.bitbucket.io/spatial-transformer-GAN
 Paper: https://chenhsuanlin.bitbucket.io/spatial-transformer-GAN/paper.pdf  
 arXiv preprint: https://arxiv.org/abs/1803.01837
 
+<p align="center"><img src="cover.png"></p>
+
 We provide TensorFlow code for the following experiments:
 - glasses compositing
 - (indoor object compositing to come soon!)
@@ -35,6 +37,10 @@ After downloading CelebA, run `python3 preprocess_celebA.py` under `glasses` to 
 To train ST-GAN, run `./train.sh` under `glasses`.  
 The checkpoints are saved in the automatically created directory `model_GROUP`; summaries are saved in `summary_GROUP`.  
 The list of optional arguments can be found by executing `python3 train_STGAN.py --help`.  
+
+To evaluate ST-GAN, run `./test.sh` under `glasses`.  
+The output of ST-GAN will be saved in the directory `eval_GROUP` (automatically created).  
+If you want to try with your own images, you can also replace the `--loadImage` flag with the path to your file (the image should be of size `144x144x3`).
 
 ### Visualizing the results  
 We've included code to visualize the training over TensorBoard. To execute, run
