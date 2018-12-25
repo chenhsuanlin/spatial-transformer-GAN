@@ -32,6 +32,13 @@ The following from the [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 
 After downloading CelebA, run `python3 preprocess_celebA.py` under `glasses` to convert the  train/test split to .npy format.
 
+### Pretrained model
+The pretrained model (121MB) can be downloaded by running the command
+```
+wget https://cmu.box.com/shared/static/5ad2lbjuvze9iey2up6hcisg6dctii4h.gz
+```
+After downloading, run `tar -zxf 5ad2lbjuvze9iey2up6hcisg6dctii4h.gz` under `glasses`. The files will be extracted to a directory `models_0`.
+
 ### Running the code
 
 To train ST-GAN, run `./train.sh` under `glasses`.  
