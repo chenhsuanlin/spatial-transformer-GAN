@@ -27,7 +27,7 @@ The dataset (6.4GB) can be downloaded by running the command
 ```
 wget https://cmu.box.com/shared/static/us4vjubhcgt5ziiikaw8kyowut1sopy5.gz
 ```
-After downloading, run tar -zxf us4vjubhcgt5ziiikaw8kyowut1sopy5.gz under `indoor`. The files will be extracted to a directory `dataset`.
+After downloading, run `tar -zxf us4vjubhcgt5ziiikaw8kyowut1sopy5.gz` under `indoor`. The files will be extracted to a directory `dataset`.
 
 ### Dataset (glasses)  
 The following from the [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset is required:
