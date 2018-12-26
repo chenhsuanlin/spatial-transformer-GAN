@@ -42,7 +42,7 @@ The pretrained model (89.6MB) can be downloaded by running the command
 ```
 wget https://cmu.box.com/shared/static/ygl08wfsc2omutwrvra3u7zjjsu1ovwv.gz
 ```
-After downloading, run `tar -zxf ygl08wfsc2omutwrvra3u7zjjsu1ovwv.gz` under `glasses`. The files will be extracted to a directory `models_0`.
+After downloading, run `tar -zxf ygl08wfsc2omutwrvra3u7zjjsu1ovwv.gz` under `indoor`. The files will be extracted to a directory `models_0`.
 
 ### Pretrained model (glasses)
 The pretrained model (121MB) can be downloaded by running the command
