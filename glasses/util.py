@@ -1,15 +1,13 @@
 import numpy as np
-import scipy.misc
+import imageio
 import tensorflow as tf
 import os
 import termcolor
 
-def mkdir(path):
-	os.makedirs(path,exist_ok=True)
 def imread(fname):
-	return scipy.misc.imread(fname)/255.0
+	return imageio.imread(fname)/255.0
 def imsave(fname,array):
-	scipy.misc.toimage(array,cmin=0.0,cmax=1.0).save(fname)
+	imageio.imsave(fname,(array*255).astype(np.uint8))
 
 # convert to colored strings
 def toRed(content): return termcolor.colored(content,"red",attrs=["bold"])
@@ -31,14 +29,14 @@ def imageSummary(opt,image,tag,H,W):
 
 # restore model
 def restoreModelFromIt(opt,sess,saver,net,it):
-	saver.restore(sess,"models_{0}/{1}_warp{4}_it{2}_{3}.ckpt".format(opt.group,opt.model,it,net,opt.warpN))
+	saver.restore(sess,"models_{0}/{1}_warp{4}_it{2}_{3}.ckpt".format(opt.group,opt.name,it,net,opt.warpN))
 # restore model
 def restoreModelPrevStage(opt,sess,saver,net):
-	saver.restore(sess,"models_{0}/{1}_warp{4}_it{2}_{3}.ckpt".format(opt.group,opt.model,opt.toIt,net,opt.warpN-1))
+	saver.restore(sess,"models_{0}/{1}_warp{4}_it{2}_{3}.ckpt".format(opt.group,opt.name,opt.toIt,net,opt.warpN-1))
 # restore model
 def restoreModel(opt,sess,saver,path,net):
 	saver.restore(sess,"models_{0}_{1}.ckpt".format(path,net))
 # save model
 def saveModel(opt,sess,saver,net,it):
-	saver.save(sess,"models_{0}/{1}_warp{4}_it{2}_{3}.ckpt".format(opt.group,opt.model,it,net,opt.warpN))
+	saver.save(sess,"models_{0}/{1}_warp{4}_it{2}_{3}.ckpt".format(opt.group,opt.name,it,net,opt.warpN))
 

@@ -8,7 +8,7 @@ def set(training):
 	parser = argparse.ArgumentParser()
 
 	parser.add_argument("--group",					default="0",			help="name for group")
-	parser.add_argument("--model",					default="test",			help="name for model instance")
+	parser.add_argument("--name",					default="test",			help="name for model instance")
 	parser.add_argument("--loadGP",					default=None,			help="load pretrained model (GP)")
 	parser.add_argument("--size",					default="144x144",		help="resolution of background image")
 	parser.add_argument("--warpType",				default="homography",	help="type of warp function on foreground image")
@@ -17,7 +17,6 @@ def set(training):
 	parser.add_argument("--stdD",		type=float,	default=0.01,			help="initialization stddev (D)")
 	if training: # training
 		parser.add_argument("--loadD",					default=None,		help="load pretrained model (D)")
-		parser.add_argument("--loaderN",	type=int,	default=16,		help="threads to load data")
 		parser.add_argument("--lrGP",		type=float,	default=1e-5,	help="base learning rate (GP)")
 		parser.add_argument("--lrGPdecay",	type=float,	default=1.0,	help="learning rate decay (GP)")
 		parser.add_argument("--lrGPstep",	type=int,	default=20000,	help="learning rate decay step size (GP)")
@@ -49,11 +48,7 @@ def set(training):
 	opt.warpDim = 8 if opt.warpType=="homography" else \
 				  6 if opt.warpType=="affine" else None
 	opt.warpApprox = 20
-	opt.BNepsilon = 1e-5
-	opt.LNepsilon = 1e-5
-	if training:
-		opt.BNdecay = 0.999
-	opt.GPUdevice = "/gpu:0"\
+	opt.GPUdevice = "/gpu:0"
 
 	# ------ below automatically set ------
 	opt.training = training
@@ -71,7 +66,7 @@ def set(training):
 
 	print("({0}) {1}".format(
 		util.toGreen("{0}".format(opt.group)),
-		util.toGreen("{0}".format(opt.model))))
+		util.toGreen("{0}".format(opt.name))))
 	print("------------------------------------------")
 	print("batch size: {0}, warps: {1}".format(
 		util.toYellow("{0}".format(opt.batchSize)),
@@ -94,6 +89,6 @@ def set(training):
 			util.toYellow("{0}".format(opt.updateD))))
 	print("------------------------------------------")
 	if training:
-		print(util.toMagenta("training model ({0}) {1}...".format(opt.group,opt.model)))
+		print(util.toMagenta("training model ({0}) {1}...".format(opt.group,opt.name)))
 
 	return opt

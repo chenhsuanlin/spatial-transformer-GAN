@@ -54,7 +54,7 @@ with tf.Session(config=tfConfig) as sess:
 	print(util.toMagenta("start evaluation..."))
 
 	# create directories for test image output
-	util.mkdir("eval_{0}".format(opt.loadGP))
+	os.makedirs("eval_{0}".format(opt.loadGP),exist_ok=True)
 	testImage = util.imread(opt.loadImage)
 	batch = data.makeBatchEval(opt,testImage,glasses,PH)
 	runList = [imageCompAll[0],imageCompAll[-1]]

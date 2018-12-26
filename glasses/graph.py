@@ -8,13 +8,13 @@ def geometric_multires(opt,imageBG,imageFG,p):
 		padH,padW = int(x.shape[1])%2,int(x.shape[2])%2
 		if padH!=0 or padW!=0: x = tf.pad(x,[[0,0],[0,padH],[0,padW],[0,0]])
 		return tf.nn.avg_pool(x,[1,2,2,1],[1,2,2,1],"VALID")
-	def conv2Layer(opt,feat,imageConcat,outDim,final=False):
+	def conv2Layer(opt,feat,imageConcat,outDim):
 		weight,bias = createVariable(opt,[4,4,int(feat.shape[-1]),outDim],stddev=opt.stdGP)
 		conv = tf.nn.conv2d(feat,weight,strides=[1,2,2,1],padding="SAME")+bias
 		feat = tf.nn.relu(conv)
 		imageConcat = downsample(imageConcat)
 		feat = tf.concat([feat,imageConcat],axis=3)
-		return (feat if not final else conv),imageConcat
+		return feat,imageConcat
 	def linearLayer(opt,feat,outDim,final=False):
 		weight,bias = createVariable(opt,[int(feat.shape[-1]),outDim],stddev=opt.stdGP)
 		fc = tf.matmul(feat,weight)+bias
@@ -23,7 +23,7 @@ def geometric_multires(opt,imageBG,imageFG,p):
 	with tf.variable_scope("geometric"):
 		imageFGwarpAll,pAll = [],[p]
 		dp = None
-		# define recurrent spatial transformations
+		# define spatial transformations
 		for l in range(opt.warpN):
 			with tf.variable_scope("warp{0}".format(l)):
 				pMtrx = warp.vec2mtrx(opt,p)

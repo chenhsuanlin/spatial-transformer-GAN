@@ -14,7 +14,7 @@ import options
 opt = options.set(training=True)
 
 # create directories for model output
-util.mkdir("models_{0}".format(opt.group))
+os.makedirs("models_{0}".format(opt.group),exist_ok=True)
 
 print(util.toMagenta("building graph..."))
 tf.reset_default_graph()
@@ -99,7 +99,7 @@ if opt.warpN>1:
 		varsGPdict["/".join(scopes)] = v
 	saver_GPcur = tf.train.Saver(varsGPdict)
 else: saver_GPcur = tf.train.Saver(var_list=varsGPcur)
-summaryWriter = tf.summary.FileWriter("summary_{0}/{1}".format(opt.group,opt.model))
+summaryWriter = tf.summary.FileWriter("summary_{0}/{1}".format(opt.group,opt.name))
 
 print(util.toYellow("======= TRAINING START ======="))
 timeStart = time.time()
@@ -176,6 +176,6 @@ with tf.Session(config=tfConfig) as sess:
 			# save model
 			util.saveModel(opt,sess,saver_GP,"GP",i+1)
 			util.saveModel(opt,sess,saver_D,"D",i+1)
-			print(util.toGreen("model saved: {0}/{1}, it.{2}".format(opt.group,opt.model,i+1)))
+			print(util.toGreen("model saved: {0}/{1}, it.{2}".format(opt.group,opt.name,i+1)))
 
 print(util.toYellow("======= TRAINING DONE ======="))

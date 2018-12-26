@@ -15,7 +15,7 @@ opt = options.set(training=True)
 assert(opt.warpN==0)
 
 # create directories for model output
-util.mkdir("models_{0}".format(opt.group))
+os.makedirs("models_{0}".format(opt.group),exist_ok=True)
 
 print(util.toMagenta("building graph..."))
 tf.reset_default_graph()
@@ -79,7 +79,7 @@ testData = data.load(opt,test=True)
 
 # prepare model saver/summary writer
 saver_D = tf.train.Saver(var_list=varsD,max_to_keep=20)
-summaryWriter = tf.summary.FileWriter("summary_{0}/{1}".format(opt.group,opt.model))
+summaryWriter = tf.summary.FileWriter("summary_{0}/{1}".format(opt.group,opt.name))
 
 print(util.toYellow("======= TRAINING START ======="))
 timeStart = time.time()
@@ -133,6 +133,6 @@ with tf.Session(config=tfConfig) as sess:
 		if (i+1)%2000==0:
 			# save model
 			util.saveModel(opt,sess,saver_D,"D",i+1)
-			print(util.toGreen("model saved: {0}/{1}, it.{2}".format(opt.group,opt.model,i+1)))
+			print(util.toGreen("model saved: {0}/{1}, it.{2}".format(opt.group,opt.name,i+1)))
 
 print(util.toYellow("======= TRAINING DONE ======="))

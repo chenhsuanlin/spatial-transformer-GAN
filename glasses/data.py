@@ -3,9 +3,7 @@ import tensorflow as tf
 import os,time
 import warp
 
-HOME = os.getenv("HOME")
-
-# load data (one thread)
+# load data
 def load(opt,test=False):
 	path = "dataset"
 	if test:
