@@ -9,22 +9,27 @@ arXiv preprint: https://arxiv.org/abs/1803.01837
 <p align="center"><img src="cover.png"></p>
 
 We provide TensorFlow code for the following experiments:
+- indoor object compositing
 - glasses compositing
-- (indoor object compositing to come soon!)
 
 --------------------------------------
-
-## Glasses
 
 ### Prerequisites
 
 This code is developed with Python3 (`python3`). TensorFlow r1.0+ is required. The dependencies can install by running  
 ```
-pip3 install --upgrade numpy scipy termcolor tensorflow-gpu
+pip3 install --upgrade numpy scipy imageio termcolor tensorflow-gpu
 ```
 If you don't have sudo access, add the `--user` flag.
 
-### Dataset  
+### Dataset (indoor objects)  
+The dataset (6.4GB) can be downloaded by running the command
+```
+wget https://cmu.box.com/shared/static/us4vjubhcgt5ziiikaw8kyowut1sopy5.gz
+```
+After downloading, run tar -zxf us4vjubhcgt5ziiikaw8kyowut1sopy5.gz under `indoor`. The files will be extracted to a directory `dataset`.
+
+### Dataset (glasses)  
 The following from the [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset is required:
 - Aligned & cropped images
 - Attribute annotations
@@ -32,7 +37,14 @@ The following from the [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 
 After downloading CelebA, run `python3 preprocess_celebA.py` under `glasses` to convert the  train/test split to .npy format.
 
-### Pretrained model
+### Pretrained model (indoor objects)
+The pretrained model (89.6MB) can be downloaded by running the command
+```
+wget https://cmu.box.com/shared/static/ygl08wfsc2omutwrvra3u7zjjsu1ovwv.gz
+```
+After downloading, run `tar -zxf ygl08wfsc2omutwrvra3u7zjjsu1ovwv.gz` under `glasses`. The files will be extracted to a directory `models_0`.
+
+### Pretrained model (glasses)
 The pretrained model (121MB) can be downloaded by running the command
 ```
 wget https://cmu.box.com/shared/static/5ad2lbjuvze9iey2up6hcisg6dctii4h.gz
@@ -41,13 +53,13 @@ After downloading, run `tar -zxf 5ad2lbjuvze9iey2up6hcisg6dctii4h.gz` under `gla
 
 ### Running the code
 
-To train ST-GAN, run `./train.sh` under `glasses`.  
+To train ST-GAN, run `./train.sh` under `indoor`/`glasses`.  
 The checkpoints are saved in the automatically created directory `model_GROUP`; summaries are saved in `summary_GROUP`.  
 The list of optional arguments can be found by executing `python3 train_STGAN.py --help`.  
 
-To evaluate ST-GAN, run `./test.sh` under `glasses`.  
+To evaluate ST-GAN, run `./test.sh` under `indoor`/`glasses`.  
 The output of ST-GAN will be saved in the directory `eval_GROUP` (automatically created).  
-If you want to try with your own images, you can also replace the `--loadImage` flag with the path to your file (the image should be of size `144x144x3`).
+For glasses, you can also replace the `--loadImage` flag with the path to your file if you want to try with your own images (the image should be of size `144x144x3`).
 
 ### Visualizing the results  
 We've included code to visualize the training over TensorBoard. To execute, run
