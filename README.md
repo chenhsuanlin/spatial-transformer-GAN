@@ -35,7 +35,8 @@ The following from the [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 - Attribute annotations
 - Train/val/test partitions
 
-After downloading CelebA, run `python3 preprocess_celebA.py` under `glasses` to convert the  train/test split to .npy format.
+After downloading CelebA, run `python3 preprocess_celebA.py` under `glasses` to convert the  train/test split to .npy format.  
+(The variable `celebA_path` should be changed to the path where CelebA is downloaded)
 
 ### Pretrained model (indoor objects)
 The pretrained model (89.6MB) can be downloaded by running the command
