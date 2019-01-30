@@ -2,7 +2,7 @@ import numpy as np
 import scipy.misc
 
 celebA_path = "/home/chenhsuan/adobe/celebA"
-output_path = "dataset_b"
+output_path = "dataset"
 
 part_dict = {}
 with open("{0}/list_eval_partition.txt".format(celebA_path)) as file:
