@@ -1,4 +1,4 @@
-# ST-GAN: Spatial Transformer Generative Adversarial Networks for Image Compositing
+## ST-GAN: Spatial Transformer Generative Adversarial Networks for Image Compositing
 Chen-Hsuan Lin, Ersin Yumer, Oliver Wang, Eli Shechtman, and Simon Lucey  
 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018  
 
