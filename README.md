@@ -6,7 +6,7 @@
 and [Simon Lucey](http://www.simonlucey.com/)  
 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018  
 
-Website: https://chenhsuanlin.bitbucket.io/spatial-transformer-GAN  
+Project page: https://chenhsuanlin.bitbucket.io/spatial-transformer-GAN  
 Paper: https://chenhsuanlin.bitbucket.io/spatial-transformer-GAN/paper.pdf  
 arXiv preprint: https://arxiv.org/abs/1803.01837
 
